@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 가라사대</title>
+  </head>
+  <style>
+    body {
+      text-align: center;
+    }
+    .main-card button {
+      position: relative;
+      left: -45px;
+      bottom: 15px;
+    }
+    .favorites {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+  
+  </style>
+  <body>
+    <div id="app"></div>
+    
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      console.log("야옹");
+
+      const Title = (props) =>{
+        return <h1>{props.children}</h1>
+      };
+      
+      const Form = () => {
+        const [counter, setCounter] = React.useState(1);
+        
+        console.log("카운터", counter);
+
+        function handleFormSubmit(e){
+          e.preventDefault();
+          console.log("폼 전송됨");
+          setCounter(counter + 1);
+        }
+        return(
+          <form onSubmit={handleFormSubmit}>
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="영어 대사를 입력해주세요" 
+          />
+          <button type="submit" >생성</button>
+          </form> 
+        );
+      }
+        
+
+      function CatItem(props){
+        return(
+          <li>
+          <img src={props.img} style={{width:"350px"}}/>
+         </li>
+        );
+      }
+      
+      function Favorites() {
+        return (
+          <ul className="favorites">
+          <CatItem img="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTVfOTUg%2FMDAxNjE1ODA4MjYyNjIy.b4dZwaf5brL6OJBVDUeU2vSqY3DoFF2LHjXKUO_mlH0g.fwOWaGShy0XPP6ATeTWYn7nqUXlYvkS0ZaNHTcQjMyog.JPEG.sonamu_amc%2F107.jpg&type=sc960_832"/>
+          <CatItem img="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMTdfNTAg%2FMDAxNjQ1MDcwMDMwMzE1.YfFmC-W7eClZ5ynbvoytuwBP6Pxq18ihYnLUfSKjB8Ug.dESCtE_H1Y_DX2hF-KQaoOWfkOYEo9m5vYLOiCBXnHsg.JPEG.ftv77%2F%25BE%25C6%25BB%25EA%25B0%25ED%25BE%25E7%25C0%25CC%25BA%25D0%25BE%25E7_%252817%2529.jpg&type=sc960_832"/>          
+        </ul>
+        )
+      }
+
+      const MainCard = ({img}) =>{
+        function handleHeartClick(){
+          console.log("하트 눌렀음");
+        }
+        function handleHeartMouseOver(){
+          console.log("하트 스쳐 지나감");
+        }
+        return (
+          <div className="main-card">
+          <img
+            src={img}
+            alt="고양이"
+            widht="400"
+          />
+          <button 
+          onClick={handleHeartClick}
+          onMouseOver={handleHeartMouseOver}>🤍</button>
+          </div>
+        );
+      };
+
+      const app = (
+        <div>
+          <Title>1번재 고양이 가라사대</Title>
+          <Form />
+          <MainCard img="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150408_294%2Fseo0775_1428485261696SBLQM_JPEG%2F%25B3%25EB%25B8%25A3%25BF%25FE%25C0%25CC%25BD%25A32-3.JPG&type=sc960_832" />
+          <Favorites />
+        </div>
+      );    
+     
+      const 여기다가그려 = document.querySelector('#app');
+
+      ReactDOM.render(app, 여기다가그려);
+    </script>
+  </body>
+</html>
